@@ -23,7 +23,7 @@ sequenceDiagram
     participant Frontend
     participant Backend
     participant DataBase
-    User ->> Frontend: вводит ID владельца
+    User ->> Frontend: Пользователь выбирает владельца
     Frontend ->> Backend: GET /get_dogs_by_owner
     Backend ->> DataBase: SELECT
     DataBase -->> Backend: Response JSON
@@ -33,12 +33,12 @@ sequenceDiagram
 {{< /mermaid >}} 
  
  
-1. Пользователь вводит ID владельца
-2. После внесения будет вызываться метод get_dogs_by_owner, с введённым ID владельца
+1. Пользователь выбирает владельца
+2. При загрзуке страницы владельца собаки вызывается метод get_dogs_by_owner
 3. Backend обращается в DataBase
 4. Database возвращает ответ в JSON
 5. Backend возвращает ответ в JSON
-6. Frontend отображает информацию в приложении.
+6. Frontend отображает информацию в интерфейсе
 
 
 ### Входные данные 
@@ -48,22 +48,28 @@ sequenceDiagram
 
 ### Выходные данные 
 | Параметр                       | Обязательное поле | Тип данных | Описание        | 
-| ------------------------------ | ----------------- | ---------- | --------------- | 
-| pet_id                         | Y                 | integer    | ID владельца    |
+| ------------------------------ | ----------------- | ---------- | --------------- |
+| owner_id                       | Y                 | integer    | ID владельца    |
+| dogs                           |                   |            |                 | 
+| [                              |                   |            |                 | 
+| pet_id                         | Y                 | integer    | ID питомца      |
 | name                           | Y                 | varchar    | имя питомца     |
 | breed                          | Y                 | varchar    | порода          |
 | age                            | Y                 | integer    | возраст         |
+| ]                              |                   |            |                 | 
 
 
 ```json 
 { 
   "owner_id": 123,
-  "dogs":{
-    "pet_id": 321,
-    "name": "example",
-    "breed": "example",
-    "age": "3"
-  }
+  "dogs":[
+    {
+      "pet_id": 321,
+      "name": "example",
+      "breed": "example",
+      "age": "3"
+    }
+  ]
 { 
 
   
