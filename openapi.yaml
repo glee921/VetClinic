@@ -1,0 +1,107 @@
+openapi: 3.0.0
+info:
+  title: OpenAPI спецификация Тестового задания
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  version: 0.0.1
+servers:
+  - url: http://localhost:8080/api/v1/
+    description: Dev server  
+  
+paths:
+  /pet/listDogs:
+    get:
+      tags:
+        - dogs 
+      summary: Получение списка собак, принадлежащих владельцу
+      description: Метод возвращает список собак по владельцу
+      operationId: getDogs
+      parameters:
+        - name: owner_id
+          in: query
+          description: ID владельца
+          required: true
+          schema:
+            type: integer
+            default: 12345
+      responses:
+        '200':
+          description: Успешно
+          content:
+            application/json:
+              schema:
+                  $ref: '#/components/schemas/Dogs'
+        '400':
+          description: Некорректные входные данные. Возвращает список атрибутов с ошибками
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Error'         
+  /pet/Dogs:
+    get:
+      summary: Получить список всех собак
+      tags:
+        - dogs
+      parameters:
+        - name: without_owner
+          in: query
+          required: false
+          description: Флаг, указывающий на необходимость получения списка собак без владельца
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Список всех собак
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  dogs:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Dog'
+components:
+  schemas:
+    Dog:
+      type: object
+      required:
+        - pet_id
+        - name
+        - breed
+      properties:
+        pet_id:
+          type: integer
+          example: 10
+        name:
+          type: string
+          example: Граф
+        breed:
+          type: string
+          example: Сибирский хаски
+        age:
+          type: integer
+          example: 7
+    Dogs:
+      type: object
+      properties:
+        owner_id:
+          type: integer
+          example: 100
+        dogs:
+          type: array
+          items:
+            $ref: '#/components/schemas/Dog'
+    Error:
+      type: object
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
