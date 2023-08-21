@@ -14,7 +14,7 @@
  
 ### Описание алгоритма 
  
- <img src="/Lightshot/Picture1.png" border="5px solid red"/>
+ <img src="/Lightshot/Picture1.png"/>
  ![Текст с описанием картинки](/Lightshot/Picture1.png)
 
 mermaid 
