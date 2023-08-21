@@ -1,4 +1,4 @@
-## Метод get_dogs_
+## Метод get_dogs
  
 Метод, котрый получает список всех собак.
  
@@ -14,7 +14,7 @@
  
 ### Описание алгоритма 
  
- <image src="/Lightshot/Picture1.png" alt="Picture1">
+<img src="/images/Picture2.png"/>
 
 mermaid 
 {{< mermaid >}} 
@@ -25,7 +25,7 @@ sequenceDiagram
     participant Frontend
     participant Backend
     participant DataBase
-    User ->> Frontend: Пользователь выбирает владельца
+    User ->> Frontend: Пользователь проставляет флаг, для получения списка собак 
     Frontend ->> Backend: GET /get_dogs
     Backend ->> DataBase: SELECT
     DataBase -->> Backend: Response JSON
@@ -35,7 +35,7 @@ sequenceDiagram
 {{< /mermaid >}} 
  
  
-1. Пользователь выбирает флаг на необходимость на необходимость получения списка собак без владельца
+1. Пользователь проставляет флаг на необходимость получения списка собак без владельца
 2. При загрзуке страницы списка собак вызывается метод get_dogs
 3. Backend обращается в DataBase
 4. Database возвращает ответ в JSON
