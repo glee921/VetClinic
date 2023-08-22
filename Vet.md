@@ -14,6 +14,8 @@
  
 ### Описание алгоритма 
  
+<image src="/images/picture.png">
+
 mermaid 
 {{< mermaid >}} 
 sequenceDiagram    
