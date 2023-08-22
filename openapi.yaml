@@ -10,18 +10,18 @@ servers:
     description: Dev server  
   
 paths:
-  /pet/listDogs:
+  /pet/get_dogs:
     get:
       tags:
         - dogs 
-      summary: Получение списка собак, принадлежащих владельцу
-      description: Метод возвращает список собак по владельцу
+      summary: Получение списка собак
+      description: Метод возвращает список собак
       operationId: getDogs
       parameters:
         - name: owner_id
           in: query
-          description: ID владельца
-          required: true
+          description: ID владельца. Eсли передать, то вернется список собак для конкретного владельца, если нет - список всех собак  
+          required: false
           schema:
             type: integer
             default: 12345
@@ -37,33 +37,8 @@ paths:
           content:
             application/json:
               schema:
-                type: array
-                items:
                   $ref: '#/components/schemas/Error'         
-  /pet/Dogs:
-    get:
-      summary: Получить список всех собак
-      tags:
-        - dogs
-      parameters:
-        - name: without_owner
-          in: query
-          required: false
-          description: Флаг, указывающий на необходимость получения списка собак без владельца
-          schema:
-            type: boolean
-      responses:
-        '200':
-          description: Список всех собак
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  dogs:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/Dog'
+
 components:
   schemas:
     Dog:
@@ -85,12 +60,12 @@ components:
         age:
           type: integer
           example: 7
+        owner_id:
+          type: integer
+          example: 100  
     Dogs:
       type: object
       properties:
-        owner_id:
-          type: integer
-          example: 100
         dogs:
           type: array
           items:
@@ -103,5 +78,7 @@ components:
       properties:
         code:
           type: integer
+          example: 400
         message:
           type: string
+          example: Некорректные входные данные
