@@ -15,35 +15,6 @@
 ### Описание алгоритма 
  
 <image src="/images/picture.png">
-
-mermaid 
-{{< mermaid >}} 
-
-sequenceDiagram    
-
-autonumber
-actor User
-participant Frontend
-participant Backend
-participant DataBase
-User ->> Frontend: Переход на страницу
-Frontend ->> Backend: GET /get_dogs
-alt Во входных данных передан owner_id
-Backend ->> DataBase: SELECT
-DataBase -->> Backend: Response по конкретному владельцу
-else Во входных данных нет owner_id
-Backend ->> DataBase: SELECT
-DataBase -->> Backend: Response по всем собакам
-end
-Backend -->> Frontend: Response JSON
-Frontend -->> User: Отображает данные
-opt 
-User ->> Frontend: Использовать фильтр по владельцам
-Frontend -->> User: Фильтрует список
-end
-    
-{{< /mermaid >}} 
- 
  
 1. Переход на страницу
 2. При загрзуке страницы владельца собаки вызывается метод get_dogs
