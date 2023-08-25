@@ -10,7 +10,7 @@ servers:
     description: Dev server  
   
 paths:
-  /pet/get_dogs:
+  /get-dogs:
     get:
       tags:
         - dogs 
